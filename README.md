@@ -99,6 +99,52 @@ Example:
 }
 ```
 
+### list-channels
+Lists all text channels in a Discord server.
+
+Parameters:
+- `server` (optional): Server name or ID (required if bot is in multiple servers)
+
+Example:
+```json
+{
+  "server": "My Server"
+}
+```
+
+Returns:
+- Server name and ID
+- List of all text channels with their ID, name, topic, and NSFW status
+- Total channel count
+
+### list-channels-with-new-messages
+Lists all channels that have received new messages since a specified time, including the message count for each channel.
+
+Parameters:
+- `server` (optional): Server name or ID (required if bot is in multiple servers)
+- `since`: Time threshold in ISO 8601 format (e.g., "2024-01-01T00:00:00Z") or relative time (e.g., "1h" for 1 hour ago, "24h" for 24 hours ago, "7d" for 7 days ago)
+
+Example:
+```json
+{
+  "since": "24h"
+}
+```
+
+Or with absolute time:
+```json
+{
+  "since": "2024-12-14T00:00:00Z"
+}
+```
+
+Returns:
+- Server name and ID
+- Time threshold used
+- List of channels with new messages, sorted by message count (descending)
+- For each channel: ID, name, message count, timestamp of newest and oldest new message
+- Total count of channels with new messages
+
 ## Development
 
 1. Install development dependencies:
@@ -126,6 +172,9 @@ Here are some example interactions you can try with Claude after setting up the 
 1. "Can you read the last 5 messages from the general channel?"
 2. "Please send a message to the announcements channel saying 'Meeting starts in 10 minutes'"
 3. "What were the most recent messages in the development channel about the latest release?"
+4. "Show me all channels in the server"
+5. "Which channels have had new messages in the last 24 hours?"
+6. "List all channels with activity in the past week"
 
 Claude will use the appropriate tools to interact with Discord while asking for your approval before sending any messages.
 
